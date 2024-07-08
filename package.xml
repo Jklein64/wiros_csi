@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>wiros_csi_node</name>
+  <name>wiros_csi</name>
   <version>0.0.0</version>
   <description>ROS interface for wireless sensor</description>
 
