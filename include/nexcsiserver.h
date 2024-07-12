@@ -28,7 +28,7 @@
 #include "rf_msgs/Wifi.h"
 #include "shutils.h"
 #include "utils.h"
-#include "wiros_csi_node/ConfigureCSI.h"
+#include "wiros_csi/ConfigureCSI.h"
 #include "rf_msgs/Station.h"
 #include "rf_msgs/AccessPoints.h"
 
@@ -140,7 +140,7 @@ bool set_chanspec(int s_chan, int s_bw);
 bool set_mac_filter(std::vector<int> filt);
 bool set_mac_filter(const uint8_t* mac);
 
-bool config_csi_callback(wiros_csi_node::ConfigureCSI::Request &req, wiros_csi_node::ConfigureCSI::Response &resp);
+bool config_csi_callback(wiros_csi::ConfigureCSI::Request &req, wiros_csi::ConfigureCSI::Response &resp);
 
 void ap_info_callback(const rf_msgs::AccessPoints::ConstPtr& msg);
 

@@ -1,39 +1,44 @@
 <?xml version="1.0"?>
 
 <launch>
-  <node pkg="wiros_csi_node" type="csi_node" name="csi_server" output="screen" clear_params="true" required="true">
-    
+  <node pkg="wiros_csi" type="csi_node" name="csi_server" output="screen" clear_params="true"
+    required="true">
+
     <!-- LOGIN DETAILS -->
-    <param name="asus_pwd"          type="string"       value="robot123!" /> <!-- password setup during Asus bringup-->
-	<param name="asus_host"        type="string"       value="wcsng"  />
-    <param name="asus_ip"           type="string"       value="192.168.43.227" />
-    
+    <param name="asus_pwd" type="string" value="robot123!" /> <!-- password setup during Asus
+    bringup-->
+    <param name="asus_host" type="string" value="wcsng" />
+    <param name="asus_ip" type="string" value="192.168.43.227" />
+
     <!-- CHANNEL PARAMS -->
-    <!-- 'channel' should be a CONTROL (20 MHz) channel. Nexmon will set to the corresponding 40 or 80MHz channel appropriately. https://en.wikipedia.org/wiki/List_of_WLAN_channels -->
-    <param name="channel"           type="double"       value="157" />
-    <param name="bw"                type="double"       value="20" />
-    
+    <!-- 'channel' should be a CONTROL (20 MHz) channel. Nexmon will set to the corresponding 40 or
+    80MHz channel appropriately. https://en.wikipedia.org/wiki/List_of_WLAN_channels -->
+    <param name="channel" type="double" value="157" />
+    <param name="bw" type="double" value="20" />
+
     <!-- PACKET PARAMS -->
     <!-- <rosparam param="mac_filter"> "11:11:11:*:*:*" </rosparam> -->
-    
+
     <!-- beacon rate in ms; with mac address 11:11:11:
                                             "first byte of hostname":
                                             "second byte of hostname":
                                             "last byte of ip4"
          if set to 0, then the AP does not transmit any packets -->
-    <param name="beacon_rate"       type="double"       value="0"   />
+    <param name="beacon_rate" type="double" value="0" />
     <!-- number of TX spatial streams. maxes out at 4 for 5GHz and 3 for 2.4GHz -->
-    <param name="beacon_tx_nss"     type="int"          value="4"   />
-    
+    <param name="beacon_tx_nss" type="int" value="4" />
+
     <!-- SETUP PARAMS -->
     <!-- Dump the packets locally on the asus then forward them over netcat.
          This may affect packet latency, but needed for older systems which cannot receive the UDP broadcast -->
-    <param name="tcp_forward"       type="bool"         value="false"    />
+    <param name="tcp_forward" type="bool" value="false" />
 
-    <!-- Used to make the asus always listen to the nearest AP (will reduce your wifi connectivity somewhat since scanning needs to be done locally), see "Real-Time channel switching" in the README -->
-    <param name="lock_topic"        type="string"       value="PUBLISHTOPIC" />
+    <!-- Used to make the asus always listen to the nearest AP (will reduce your wifi connectivity
+    somewhat since scanning needs to be done locally), see "Real-Time channel switching" in the
+    README -->
+    <param name="lock_topic" type="string" value="PUBLISHTOPIC" />
 
     <!-- Launch the node, but do not configure the router. useful for debug purposes. -->
-    <param name="no_config"         type="bool"         value="false"    />
+    <param name="no_config" type="bool" value="false" />
   </node>
 </launch>

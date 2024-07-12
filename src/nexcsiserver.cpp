@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
   spinner.start();
 
 
-  ros::ServiceServer set_chanspec_srv = nh.advertiseService<wiros_csi_node::ConfigureCSI::Request, wiros_csi_node::ConfigureCSI::Response>("configure_csi",config_csi_callback);
+  ros::ServiceServer set_chanspec_srv = nh.advertiseService<wiros_csi::ConfigureCSI::Request, wiros_csi::ConfigureCSI::Response>("configure_csi",config_csi_callback);
 
   //handle shutdown
   signal(SIGINT, handle_shutdown);
@@ -628,7 +628,7 @@ void setup_params(ros::NodeHandle& nh){
 
 
 //handle change of channel, returns false on error.
-bool config_csi_callback(wiros_csi_node::ConfigureCSI::Request &req, wiros_csi_node::ConfigureCSI::Response &resp){
+bool config_csi_callback(wiros_csi::ConfigureCSI::Request &req, wiros_csi::ConfigureCSI::Response &resp){
   if(req.chan == ch && req.bw == bw){
 	resp.result = "No Change Applied.";
 	return true;
