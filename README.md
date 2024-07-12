@@ -1,8 +1,8 @@
-# ROS Wrapper for Nexmon-CSI
+_Part of the [WiROS](https://github.com/Jklein64/wiros) Wifi sensing toolbox_
 
-This is a package for integrating the [nexmon-csi](https://github.com/seemoo-lab/nexmon_csi) platform for an [ASUS RT-AC86U AP](https://www.asus.com/us/networking-iot-servers/wifi-routers/asus-wifi-routers/rt-ac86u/) with ROS. It is currently tested on ROS kinetic, melodic, and noetic.
+# wiros_csi
 
-< Go back to the [index page](https://github.com/ucsdwcsng/WiROS)
+This is a package for integrating the [nexmon-csi](https://github.com/seemoo-lab/nexmon_csi) platform for an [ASUS RT-AC86U AP](https://www.asus.com/us/networking-iot-servers/wifi-routers/asus-wifi-routers/rt-ac86u/) with ROS. It is currently tested on ROS noetic.
 
 ## Motivation
 
@@ -38,36 +38,7 @@ The project consists of a core node which interacts with the ASUS router via eth
 
 ### Step 2: Installing the ROS package
 
-- If you do not already have a catkin workspace:
-
-```
-cd ~ && mkdir -p wifi_ws/src && cd wifi_ws && catkin init
-```
-
-- Enter the source folder and clone this repository:
-
-```
-cd src && git clone git@github.com:ucsdwcsng/wiros_csi.git
-```
-
-- Install the [rf_msgs](https://github.com/ucsdwcsng/rf_msgs) dependency to your source folder (Adds ROS messages for CSI information)
-
-```
-git clone git@github.com:ucsdwcsng/rf_msgs.git
-```
-
-- Build the node
-
-```
-catkin config --install #(optional)
-catkin build (or) catkin_make
-```
-
-- Remember to add the setup script to your .bashrc:
-
-```
-echo "source ~/wifi_ws/install/setup.bash" >> ~/.bashrc
-```
+Follow the install instructions from the [main project README](https://github.com/Jklein64/wiros).
 
 ### Step 3: Installing the Nexmon CSI firmware
 
@@ -132,7 +103,7 @@ For example, to listen on channel 155 (80MHz centered at 5.775 GHz), you would s
 
 ### Using the Data
 
-The `csi_node` publishes `WiFi` message data on the `/csi` topic. More information about the messages is [here](https://github.com/ucsdwcsng/rf_msgs).
+The `csi_node` publishes `WiFi` message data on the `/csi_raw` topic. More information about the messages is [here](https://github.com/ucsdwcsng/rf_msgs).
 Additionally, we have made scripts available to convert rosbags containing CSI info to .npz or .mat files for
 convenient post-processing [here](https://github.com/ucsdwcsng/ros_bearing_sensor).
 This repo also contains functionality such as processing the CSI data in real time to give real-time angle of arrival, angle of departure, and calculation of calibration values.
@@ -145,7 +116,7 @@ You can switch the channel/bandwidth/MAC filter on the fly by calling the servic
 
 ### Automatic
 
-If you are deploying the node on a mobile platform it may be useful to programatically switch channels to gather information about a large number of devices in the environment. We have provided an additional node, `ap_scanner`, which uses your computer's WiFi card to intermittently scan for APs and publishes an [`AccessPoints`](https://github.com/ucsdwcsng/rf_msgs/blob/main/msg/AccessPoints.msg) message sorted by signal strength. The `csi_node` can be configured to try to listen to the strongest AP via the `lock_topic` argument. This will interrupt your device's wifi connectivity. You can also publish your own `AccessPoints` messages to switch channels.
+If you are deploying the node on a mobile platform it may be useful to programatically switch channels to gather information about a large number of devices in the environment. We have provided an additional node, `ap_scanner`, which uses your computer's WiFi card to intermittently scan for APs and publishes an [`AccessPoints`](https://github.com/Jklein64/rf_msgs/blob/109383c6094cb55c331d02f6320f2352812b19e1/msg/AccessPoints.msg) message sorted by signal strength. The `csi_node` can be configured to try to listen to the strongest AP via the `lock_topic` argument. This will interrupt your device's wifi connectivity. You can also publish your own `AccessPoints` messages to switch channels.
 
 ```
 rosrun wiros_csi ap_scanner _iface:=INTERFACE _period:=SCANPERIOD _topic:=PUBLISHTOPIC
