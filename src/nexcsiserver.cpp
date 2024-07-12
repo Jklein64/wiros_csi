@@ -194,7 +194,7 @@ int main(int argc, char* argv[]){
   // std::string rx_no_dot(rx_ip);
   // rx_no_dot.erase(remove(rx_no_dot.begin(), rx_no_dot.end(), '.'), rx_no_dot.end());
   // sprintf(topic_name, "csi", rx_no_dot.c_str());
-  sprintf(topic_name, "/csi");
+  sprintf(topic_name, "/csi_raw");
   pub_csi = nh.advertise<rf_msgs::Wifi>(topic_name,10);
   ROS_INFO("Publishing: %s", pub_csi.getTopic().c_str());
 
