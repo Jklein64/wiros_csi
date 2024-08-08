@@ -29,8 +29,6 @@
 #include "shutils.h"
 #include "utils.h"
 #include "wiros_csi/ConfigureCSI.h"
-#include "rf_msgs/Station.h"
-#include "rf_msgs/AccessPoints.h"
 
 #define SA struct sockaddr
 
@@ -141,8 +139,6 @@ bool set_mac_filter(std::vector<int> filt);
 bool set_mac_filter(const uint8_t* mac);
 
 bool config_csi_callback(wiros_csi::ConfigureCSI::Request &req, wiros_csi::ConfigureCSI::Response &resp);
-
-void ap_info_callback(const rf_msgs::AccessPoints::ConstPtr& msg);
 
 //helper functions
 

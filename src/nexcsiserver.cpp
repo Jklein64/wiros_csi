@@ -68,12 +68,6 @@ int main(int argc, char* argv[]){
   //read params
   setup_params(nh);
 
-  //optional subscribe to AP info topic
-  if(lock_topic != std::string("")){
-	sub_ap = nh.subscribe(lock_topic, 10, ap_info_callback);
-	ROS_INFO("Subscribing: %s", sub_ap.getTopic().c_str());
-  }
-
   //display starting chanspec
   ROS_INFO("chanspec %d/%d", (int)ch, (int)bw);
 
@@ -644,18 +638,5 @@ bool config_csi_callback(wiros_csi::ConfigureCSI::Request &req, wiros_csi::Confi
   resp.result = reconfigure();
   resp.result.erase(std::remove_if(resp.result.begin(),resp.result.end(), sanitize_string), resp.result.end());
   return true;
-}
-
-void ap_info_callback(const rf_msgs::AccessPoints::ConstPtr& msg){
-  uint8_t a_mac[6];
-  if(msg->aps.size() < 1) return;
-  
-  mac_filter filt;
-  filt.len = 5;
-  memcpy(filt.mac, msg->aps[0].mac.data(), 6);
-  if(!set_mac_filter(filt) && !set_chanspec(msg->aps[0].channel, 20)){
-	reconfigure();
-  }
-
 }
 
